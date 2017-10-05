@@ -83,13 +83,23 @@ function update(delta) {
 
 function render() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+	
+	for(var i = 10; i < canvas.height; i+= player.h)
+	{
+		ctx.beginPath();
+		ctx.rect(0, canvas.height - i - 1, canvas.width, 1);
+		ctx.fillStyle = "#888888";
+		ctx.fill();
+		ctx.closePath();
+	}
+	
     renderObj(player);
 }
 
 function renderObj(obj) {
     ctx.beginPath();
     ctx.rect(obj.x, canvas.height - obj.y - obj.h, obj.w, obj.h);
-    ctx.fillStyle = (Math.abs(player.velX) >= maxSpeed) ? "#00FF00" :  "#FF0000";
+    ctx.fillStyle = (Math.abs(obj.velX) >= maxSpeed) ? "#00FF00" :  "#FF0000";
     ctx.fill();
     ctx.closePath();
 }
