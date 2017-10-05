@@ -38,7 +38,7 @@ h1 {
 }
 
 #testEngine {
-    background: #eee;
+    background: #fff;
     display: block;
     margin: 0 auto;
 }
@@ -48,4 +48,22 @@ h1 {
 	margin: 10px;
 	font-size: large;
 	display: block;
+}
+
+.setting {
+    margin: 20px;
+}
+
+.setting .ui-slider-range {
+    background: #999999;
+}
+
+.setting .ui-slider-handle {
+    border-color: #999999;
+}
+
+.setting-label {
+    margin-top: 20px;
+    font-size: large;
+    display: block;
 }

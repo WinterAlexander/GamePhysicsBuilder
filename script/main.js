@@ -9,11 +9,12 @@ var maxSpeed = 20;
 var acc = 100;
 var dec = 25;
 
-var scale = 25;
+var baseScale = 25;
+var scale = baseScale;
 
 var lastUpdate = Date.now();
 
-var rightPressed, leftPressed, upPressed;
+var rightPressed = false, leftPressed = false, upPressed = false;
 
 var presets = [
 				{name: "Default", Y1: 2, Y2: 4, Y3: 5, L: 0.75},
@@ -35,7 +36,22 @@ $(function() {
 
 	loadPresets();
     applyPreset(presets[0]);
+
+    $('#scaleSlider').slider({
+        orientation: "horizontal",
+        range: "min",
+        max: 200,
+        min: 5,
+        value: scale,
+        slide: updateScale,
+        change: updateScale
+    });
 });
+
+function updateScale() {
+    scale = $("#scaleSlider").val();
+    $("#scaleVal").text(scale / baseScale);
+}
 
 function loadPresets() {
 	for(var i in presets) {
@@ -113,17 +129,27 @@ function update(delta) {
 }
 
 function render() {
-	ctx.beginPath();
-	ctx.rect(0, 0, canvas.width, canvas.height);
-	ctx.fillStyle = "#FFFFFF";
-	ctx.fill();
-	ctx.closePath();
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-	ctx.beginPath();
-	ctx.rect(0, canvas.height - scale, canvas.width, scale);
-	ctx.fillStyle = "#888888";
-	ctx.fill();
-	ctx.closePath();
+    var offsetX = mod(player.x * scale, 2 * scale);
+
+    var c = mod(player.x * scale, 4 * scale) > 2 * scale;
+    for(var x = -offsetX; x < canvas.width + offsetX; x += 2 * scale)
+    {
+        ctx.beginPath();
+        ctx.rect(x, canvas.height - scale, 2 * scale, scale);
+
+        ctx.fillStyle = c % 2 == 0 ? "#CD853F" : "#A0522D";
+        ctx.fill();
+        ctx.closePath();
+        c++;
+    }
+
+    ctx.beginPath();
+    ctx.rect(0, canvas.height - scale, canvas.width, 5);
+    ctx.fillStyle = "#5abc25";
+    ctx.fill();
+    ctx.closePath();
 
 	for(var i = scale * 2; i < canvas.height; i+= scale)
 	{
@@ -136,50 +162,51 @@ function render() {
 
 	if(validFormula)
 	{
-		ctx.fillStyle = "#0000FF";
+        var y1 = Number($("#y1").val());
+        var y2 = Number($("#y2").val());
+        var y3 = Number($("#y3").val());
+
+		ctx.fillStyle = "#8725dd";
 		ctx.font = "14px Arial";
-		ctx.fillText("Y1", 0, canvas.height - (Number($("#y1").val()) + 1) * scale);
+		ctx.fillText("Y1", 0, canvas.height - (y1 + 1) * scale);
 
 		ctx.beginPath();
-		ctx.rect(0, canvas.height - (Number($("#y1").val()) + 1) * scale + 1, canvas.width, 1);
+		ctx.rect(0, canvas.height - (y1 + 1) * scale + 1, canvas.width, 1);
 		ctx.fill();
 		ctx.closePath();
 
-		ctx.fillStyle = "#000000";
+		ctx.fillStyle = "#010101";
 		ctx.font = "14px Arial";
-		ctx.fillText("Y2", 0, canvas.height - (Number($("#y2").val()) + 1) * scale);
+		ctx.fillText("Y2", 0, canvas.height - (y2 + 1) * scale);
 
 		ctx.beginPath();
-		ctx.rect(0, canvas.height - (Number($("#y2").val()) + 1) * scale + 1, canvas.width, 1);
+		ctx.rect(0, canvas.height - (y2 + 1) * scale + 1, canvas.width, 1);
 		ctx.fill();
 		ctx.closePath();
 
 		ctx.fillStyle = "#8B4513";
 		ctx.font = "14px Arial";
-        ctx.fillText("Y3", 0, canvas.height - (Number($("#y3").val()) + 1) * scale);
+        ctx.fillText("Y3", 0, canvas.height - (y3 + 1) * scale);
 
 		ctx.beginPath();
-		ctx.rect(0, canvas.height - (Number($("#y3").val()) + 1) * scale + 1, canvas.width, 1);
+		ctx.rect(0, canvas.height - (y3 + 1) * scale + 1, canvas.width, 1);
 		ctx.fill();
 		ctx.closePath();
 	}
-	
-    renderObj(player);
-}
 
-function renderObj(obj) {
+    //player
     ctx.beginPath();
-    ctx.rect(obj.x * scale, canvas.height - obj.y * scale - obj.h * scale, obj.w * scale, obj.h * scale);
-    ctx.fillStyle = (Math.abs(obj.velX) >= maxSpeed) ? "#FF0000" :  "#444444";
+    ctx.rect(canvas.width / 2 - player.w / 2, canvas.height - player.y * scale - player.h * scale, player.w * scale, player.h * scale);
+    ctx.fillStyle = (Math.abs(player.velX) >= maxSpeed) ? "#e812d9" :  "#1bc0fc";
     ctx.fill();
     ctx.closePath();
 }
 
 function updateFormula() {
-    var y1 = $("#y1").val();
-    var y2 = $("#y2").val();
-    var y3 = $("#y3").val();
-    var l = $("#l").val();
+    var y1 = Number($("#y1").val());
+    var y2 = Number($("#y2").val());
+    var y3 = Number($("#y3").val());
+    var l = Number($("#l").val());
 
     if(isNaN(y1) || isNaN(y2) || isNaN(y3) || isNaN(l) || y1 < 0 || y2 < y1 || y3 < y2 || l <= 0) {
         validFormula = false;
@@ -222,4 +249,8 @@ function keyUpHandler(e) {
 
 function signum(x) {
     return (x > 0) - (x < 0);
+}
+
+function mod(n, m) {
+    return ((n % m) + m) % m;
 }
