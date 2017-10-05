@@ -42,3 +42,10 @@ h1 {
     display: block;
     margin: 0 auto;
 }
+
+.preset {
+	padding: 10px;
+	margin: 10px;
+	font-size: large;
+	display: block;
+}

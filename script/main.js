@@ -3,18 +3,25 @@ var player;
 var canvas;
 var ctx;
 
-var G = 500;
-var V0 = 400;
-var F = 10;
-var R = 10;
+var G, V0, F, R;
 
-var maxSpeed = 200;
-var acc = 1000;
-var dec = 250;
+var maxSpeed = 20;
+var acc = 100;
+var dec = 25;
+
+var scale = 25;
 
 var lastUpdate = Date.now();
 
 var rightPressed, leftPressed, upPressed;
+
+var presets = [
+				{name: "Default", Y1: 2, Y2: 4, Y3: 5, L: 0.75},
+				{name: "Fluffy", Y1: 3, Y2: 5, Y3: 6, L: 1.5},
+				{name: "Rock", Y1: 6, Y2: 6.5, Y3: 7, L: 0.4}
+			];
+
+var validFormula = false;
 
 $(function() {
     $(".formula-input").on("input propertychange paste", updateFormula);
@@ -25,10 +32,32 @@ $(function() {
     setInterval(tick, 16);
 
     initGame();
+
+	loadPresets();
+    applyPreset(presets[0]);
 });
 
+function loadPresets() {
+	for(var i in presets) {
+		$("#presets").append('<a class="preset btn btn-default" id="preset_' + i + '">' + presets[i].name + '</a>');
+	}
+
+	$(".preset").on("click", function(event) {
+		applyPreset(presets[event.target.id.split("_")[1]]);
+	});
+}
+
+function applyPreset(preset) {
+    $("#y1").val(preset.Y1);
+    $("#y2").val(preset.Y2);
+    $("#y3").val(preset.Y3);
+    $("#l").val(preset.L);
+
+    updateFormula();
+}
+
 function initGame() {
-    player = { velX: 0, velY: 0, x: canvas.width / 2 - 25 / 2, y: canvas.height - 25, w: 25, h: 25 };
+    player = { velX: 0, velY: 0, x: canvas.width / scale / 2 - 1 / 2, y: canvas.height / scale - 1, w: 1, h: 1 };
 
     document.addEventListener("keydown", keyDownHandler, false);
     document.addEventListener("keyup", keyUpHandler, false);
@@ -64,9 +93,11 @@ function update(delta) {
             player.velX = maxSpeed * prevDir;
     }
 
+
     if(upPressed) {
-        if(player.y == 10)
+        if(player.y == 1)
             player.velY = V0 + R * (Math.abs(player.velX) / maxSpeed);
+
         player.velY += F * delta;
     }
 
@@ -75,20 +106,60 @@ function update(delta) {
     player.x += player.velX * delta;
     player.y += player.velY * delta;
 
-    if(player.y < 10) {
-        player.y = 10;
+    if(player.y < 1) {
+        player.y = 1;
         player.velY = 0;
     }
 }
 
 function render() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-	
-	for(var i = 10; i < canvas.height; i+= player.h)
+	ctx.beginPath();
+	ctx.rect(0, 0, canvas.width, canvas.height);
+	ctx.fillStyle = "#FFFFFF";
+	ctx.fill();
+	ctx.closePath();
+
+	ctx.beginPath();
+	ctx.rect(0, canvas.height - scale, canvas.width, scale);
+	ctx.fillStyle = "#888888";
+	ctx.fill();
+	ctx.closePath();
+
+	for(var i = scale * 2; i < canvas.height; i+= scale)
 	{
 		ctx.beginPath();
-		ctx.rect(0, canvas.height - i - 1, canvas.width, 1);
-		ctx.fillStyle = "#888888";
+		ctx.rect(0, canvas.height - i + 1, canvas.width, 1);
+		ctx.fillStyle = "#D0D0D0";
+		ctx.fill();
+		ctx.closePath();
+	}
+
+	if(validFormula)
+	{
+		ctx.fillStyle = "#0000FF";
+		ctx.font = "14px Arial";
+		ctx.fillText("Y1", 0, canvas.height - (Number($("#y1").val()) + 1) * scale);
+
+		ctx.beginPath();
+		ctx.rect(0, canvas.height - (Number($("#y1").val()) + 1) * scale + 1, canvas.width, 1);
+		ctx.fill();
+		ctx.closePath();
+
+		ctx.fillStyle = "#000000";
+		ctx.font = "14px Arial";
+		ctx.fillText("Y2", 0, canvas.height - (Number($("#y2").val()) + 1) * scale);
+
+		ctx.beginPath();
+		ctx.rect(0, canvas.height - (Number($("#y2").val()) + 1) * scale + 1, canvas.width, 1);
+		ctx.fill();
+		ctx.closePath();
+
+		ctx.fillStyle = "#8B4513";
+		ctx.font = "14px Arial";
+        ctx.fillText("Y3", 0, canvas.height - (Number($("#y3").val()) + 1) * scale);
+
+		ctx.beginPath();
+		ctx.rect(0, canvas.height - (Number($("#y3").val()) + 1) * scale + 1, canvas.width, 1);
 		ctx.fill();
 		ctx.closePath();
 	}
@@ -98,8 +169,8 @@ function render() {
 
 function renderObj(obj) {
     ctx.beginPath();
-    ctx.rect(obj.x, canvas.height - obj.y - obj.h, obj.w, obj.h);
-    ctx.fillStyle = (Math.abs(obj.velX) >= maxSpeed) ? "#00FF00" :  "#FF0000";
+    ctx.rect(obj.x * scale, canvas.height - obj.y * scale - obj.h * scale, obj.w * scale, obj.h * scale);
+    ctx.fillStyle = (Math.abs(obj.velX) >= maxSpeed) ? "#FF0000" :  "#444444";
     ctx.fill();
     ctx.closePath();
 }
@@ -111,6 +182,7 @@ function updateFormula() {
     var l = $("#l").val();
 
     if(isNaN(y1) || isNaN(y2) || isNaN(y3) || isNaN(l) || y1 < 0 || y2 < y1 || y3 < y2 || l <= 0) {
+        validFormula = false;
         $("#formula").html("V(t) = V0 + R*s - G*t + F*t*j");
         return;
     }
@@ -120,7 +192,8 @@ function updateFormula() {
     F = 8 * y2 * (y2 - y1) / (l * l * y1);
     R = 4 * y2 * (Math.sqrt(y3 / y2) - 1) / l;
 
-    $("#formula").html("V(t) = " + V0 + " + " + R + "s - " + G + "t + " + F + "t*j");
+    $("#formula").html("V(t) = " + V0.toFixed(3) + " + " + R.toFixed(3) + "s - " + G.toFixed(3) + "t + " + F.toFixed(3) + "t*j");
+	validFormula = true;
 }
 
 function keyDownHandler(e) {
