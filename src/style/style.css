@@ -1,0 +1,44 @@
+body {
+    background-color: aliceblue;
+}
+
+.section {
+    background-color: white;
+    padding: 2em;
+    margin: 2em;
+}
+
+.footer {
+    padding: 2em;
+    margin: 2em;
+    background-color: white;
+    text-align: center;
+    width: 100%;
+}
+
+h1 {
+
+}
+
+#formula {
+    display: block;
+    margin-top: 1em;
+    text-align: center;
+    font-family: "Times New Roman", serif;
+    font-size: large;
+    font-style: italic;
+}
+
+.formula-input-group {
+    margin-top: 1em;
+}
+
+.formula-input-label {
+    width: 20px;
+}
+
+#testEngine {
+    background: #eee;
+    display: block;
+    margin: 0 auto;
+}
