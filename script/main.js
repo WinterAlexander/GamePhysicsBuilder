@@ -3,14 +3,14 @@ var player;
 var canvas;
 var ctx;
 
-var G = 100;
-var V0 = 200;
+var G = 500;
+var V0 = 400;
 var F = 10;
 var R = 10;
 
-var maxSpeed = 10000;
-var acc = 500;
-var dec = 500;
+var maxSpeed = 200;
+var acc = 1000;
+var dec = 250;
 
 var lastUpdate = Date.now();
 
@@ -28,7 +28,7 @@ $(function() {
 });
 
 function initGame() {
-    player = { velX: 0, velY: 0, x: canvas.width / 2 - 20, y: canvas.height - 40, w: 40, h: 40 };
+    player = { velX: 0, velY: 0, x: canvas.width / 2 - 25 / 2, y: canvas.height - 25, w: 25, h: 25 };
 
     document.addEventListener("keydown", keyDownHandler, false);
     document.addEventListener("keyup", keyUpHandler, false);
@@ -89,7 +89,7 @@ function render() {
 function renderObj(obj) {
     ctx.beginPath();
     ctx.rect(obj.x, canvas.height - obj.y - obj.h, obj.w, obj.h);
-    ctx.fillStyle = "#FF0000";
+    ctx.fillStyle = (Math.abs(player.velX) >= maxSpeed) ? "#00FF00" :  "#FF0000";
     ctx.fill();
     ctx.closePath();
 }
