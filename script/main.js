@@ -40,8 +40,8 @@ $(function() {
     $('#scaleSlider').slider({
         orientation: "horizontal",
         range: "min",
-        max: 200,
-        min: 5,
+        max: 1000,
+        min: 50,
         value: scale,
         slide: updateScale,
         change: updateScale
@@ -49,8 +49,8 @@ $(function() {
 });
 
 function updateScale() {
-    scale = $("#scaleSlider").val();
-    $("#scaleVal").text(scale / baseScale);
+    scale = $("#scaleSlider").slider("value") / 10;
+    $("#scaleVal").text("x" + (scale / baseScale).toFixed(2));
 }
 
 function loadPresets() {
@@ -196,7 +196,7 @@ function render() {
 
     //player
     ctx.beginPath();
-    ctx.rect(canvas.width / 2 - player.w / 2, canvas.height - player.y * scale - player.h * scale, player.w * scale, player.h * scale);
+    ctx.rect(canvas.width / 2 - player.w * scale / 2, canvas.height - player.y * scale - player.h * scale, player.w * scale, player.h * scale);
     ctx.fillStyle = (Math.abs(player.velX) >= maxSpeed) ? "#e812d9" :  "#1bc0fc";
     ctx.fill();
     ctx.closePath();
@@ -224,26 +224,35 @@ function updateFormula() {
 }
 
 function keyDownHandler(e) {
-    if(e.keyCode == 39) {
+    if(e.keyCode == 39 || e.keyCode == 68) {
         rightPressed = true;
+        e.preventDefault();
     }
-    else if(e.keyCode == 38) {
+    else if(e.keyCode == 38 || e.keyCode == 87 || e.keyCode == 32) {
         upPressed = true;
+
+        e.preventDefault();
     }
-    else if(e.keyCode == 37) {
+    else if(e.keyCode == 37 || e.keyCode == 65) {
         leftPressed = true;
+        e.preventDefault();
+    }
+    else if(e.keyCode == 40) {
+        e.preventDefault();
     }
 }
 
 function keyUpHandler(e) {
-    if(e.keyCode == 39) {
+    if(e.keyCode == 39 || e.keyCode == 68) {
         rightPressed = false;
     }
-    else if(e.keyCode == 38) {
+    else if(e.keyCode == 38 || e.keyCode == 87 || e.keyCode == 32) {
         upPressed = false;
     }
-    else if(e.keyCode == 37) {
+    else if(e.keyCode == 37 || e.keyCode == 65) {
         leftPressed = false;
+    }
+    else if(e.keyCode == 40) {
     }
 }
 
