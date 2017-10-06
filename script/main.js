@@ -5,7 +5,7 @@ var ctx;
 
 var G, V0, F, R;
 
-var maxSpeed = 20;
+var speed = 20;
 var acc = 100;
 var dec = 25;
 
@@ -40,17 +40,49 @@ $(function() {
     $('#scaleSlider').slider({
         orientation: "horizontal",
         range: "min",
-        max: 1000,
-        min: 50,
-        value: scale,
+        max: 100 * 10,
+        min: 5 * 10,
+        value: scale * 10,
         slide: updateScale,
         change: updateScale
+    });
+
+
+    $('#speedSlider').slider({
+        orientation: "horizontal",
+        range: "min",
+        max: 100 * baseScale,
+        min: 2 * baseScale,
+        value: speed * baseScale,
+        slide: updateSpeed,
+        change: updateSpeed
+    });
+
+    $('#accSlider').slider({
+        orientation: "horizontal",
+        range: "min",
+        max: 200 * baseScale,
+        min: 1 * baseScale,
+        value: acc * baseScale,
+        slide: updateAcc,
+        change: updateAcc
     });
 });
 
 function updateScale() {
     scale = $("#scaleSlider").slider("value") / 10;
-    $("#scaleVal").text("x" + (scale / baseScale).toFixed(2));
+    $("#scaleVal").text("x" + parseFloat((scale / baseScale).toFixed(2)));
+}
+
+function updateSpeed() {
+    speed = $("#speedSlider").slider("value") / baseScale;
+    $("#speedVal").text(parseFloat(speed.toFixed(2)));
+}
+
+function updateAcc() {
+    acc = $("#accSlider").slider("value") / baseScale;
+    $("#accVal").text(parseFloat(acc.toFixed(2)));
+    dec = acc / 4;
 }
 
 function loadPresets() {
@@ -101,18 +133,18 @@ function update(delta) {
     if(signum(player.velX) != prevDir)
         player.velX = 0;
 
-    if(Math.abs(player.velX) < maxSpeed || prevDir != newDir)
+    if(Math.abs(player.velX) < speed || prevDir != newDir)
     {
         player.velX += newDir * acc * delta;
 
-        if(Math.abs(player.velX) > maxSpeed && prevDir == newDir)
-            player.velX = maxSpeed * prevDir;
+        if(Math.abs(player.velX) > speed && prevDir == newDir)
+            player.velX = speed * prevDir;
     }
 
 
     if(upPressed) {
         if(player.y == 1)
-            player.velY = V0 + R * (Math.abs(player.velX) / maxSpeed);
+            player.velY = V0 + R * (Math.abs(player.velX) / speed);
 
         player.velY += F * delta;
     }
@@ -197,7 +229,7 @@ function render() {
     //player
     ctx.beginPath();
     ctx.rect(canvas.width / 2 - player.w * scale / 2, canvas.height - player.y * scale - player.h * scale, player.w * scale, player.h * scale);
-    ctx.fillStyle = (Math.abs(player.velX) >= maxSpeed) ? "#e812d9" :  "#1bc0fc";
+    ctx.fillStyle = (Math.abs(player.velX) >= speed) ? "#e812d9" :  "#1bc0fc";
     ctx.fill();
     ctx.closePath();
 }
@@ -219,7 +251,7 @@ function updateFormula() {
     F = 8 * y2 * (y2 - y1) / (l * l * y1);
     R = 4 * y2 * (Math.sqrt(y3 / y2) - 1) / l;
 
-    $("#formula").html("V(t) = " + V0.toFixed(3) + " + " + R.toFixed(3) + "s - " + G.toFixed(3) + "t + " + F.toFixed(3) + "t*j");
+    $("#formula").html("V(t) = " + parseFloat(V0.toFixed(3)) + " + " + parseFloat(R.toFixed(3)) + "s - " + parseFloat(G.toFixed(3)) + "t + " + parseFloat(F.toFixed(3)) + "t*j");
 	validFormula = true;
 }
 
