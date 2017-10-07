@@ -41,7 +41,7 @@ $(function() {
     initGame();
 
 	loadPresets();
-    applyPreset(presets[0]);
+	applyPreset(presets[0]);
 
     $('#scaleSlider').slider({
         orientation: "horizontal",
@@ -106,8 +106,8 @@ function updateAcc() {
 }
 
 function loadPresets() {
-	for(var i in presets) {
-		$("#presets").append('<a class="preset btn btn-default" href="#" id="preset_' + i + '">' + presets[i].name + '</a>');
+	for(var i in presets) {//adding href="#" adds nothing and scroll back to the top which can be annoying for user
+		$("#presets").append('<a class="preset btn btn-default" id="preset_' + i + '">' + presets[i].name + '</a>');
 	}
 
 	$(".preset").on("click", function(event) {

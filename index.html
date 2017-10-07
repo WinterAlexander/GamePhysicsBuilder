@@ -1,185 +1,186 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Game Physics Builder</title>
-
-    <meta charset="utf-8">
-
-    <link rel="stylesheet" href="lib/jQuery/jquery-ui-1.12.1.css">
-    <script src="lib/jQuery/jquery-3.2.1.min.js"></script>
-    <script src="lib/jQuery/jquery-ui-1.12.1.min.js"></script>
-    <script src="lib/Bootstrap/bootstrap-3.3.7.min.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
-    <link rel="stylesheet" href="lib/Bootstrap/style.css">
-    <script src="script/frontend.js"></script>
-
-    <script src="script/main.js"></script>
+	<title>Game Physics Builder</title>
+	
+	<meta charset="utf-8">
+	
+	<link rel="stylesheet" href="lib/jQuery/jquery-ui-1.12.1.css">
+	<script src="lib/jQuery/jquery-3.2.1.min.js"></script>
+	<script src="lib/jQuery/jquery-ui-1.12.1.min.js"></script>
+	<script src="lib/Bootstrap/bootstrap-3.3.7.min.js"></script>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	
+	<link rel="stylesheet" href="lib/Bootstrap/style.css">
+	<script src="script/frontend.js"></script>
+	
+	<script src="script/main.js"></script>
 </head>
 <body>
 <div class="container">
-    <div class="section">
-        <div class="jumbotron">
-            <h1>Game Physics Builder</h1>
-            <p>Online tool to create and test physics for your game !</p>
-        </div>
-        <div class="row">
-            <div class="col-md-3">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Parameters</h3>
-                    </div>
-                    <div class="panel-body">
-
-                        <h4>Jump heights:</h4>
-                        <span class="input-group" >
-                            <span class="input-group-btn">
-                              <a id="y1Helper" class="btn btn-default" tabindex="0" role="button" data-container="body"
-                                 data-placement="left">
-                                  <i class="material-icons">help</i>
-                              </a>
-                            </span>
-                            <span class="input-group-addon">
-                                <div class="formula-input-label">Y1</div>
-                            </span>
-                            <label for="y1"></label><input id="y1" class="form-control" type="text">
-                        </span>
-                        <span class="input-group" >
-                            <span class="input-group-btn">
-                              <a id="y2Helper" class="btn btn-default" tabindex="0" role="button" data-container="body"
-                                 data-placement="left">
-                                  <i class="material-icons">help</i>
-                              </a>
-                            </span>
-                            <span class="input-group-addon">
-                                <div class="formula-input-label">Y2</div>
-                            </span>
-                            <label for="y2"></label><input id="y2" class="form-control" type="text">
-                        </span>
-                        <span class="input-group" >
-                            <span class="input-group-btn">
-                              <a id="y3Helper" class="btn btn-default" tabindex="0" role="button" data-container="body"
-                                 data-placement="left">
-                                  <i class="material-icons">help</i>
-                              </a>
-                            </span>
-                            <span class="input-group-addon">
-                                <div class="formula-input-label">Y2</div>
-                            </span>
-                            <label for="y3"></label><input id="y3" class="form-control" type="text">
-                        </span>
-
-                        <h4>Jump duration:</h4>
-                        <span class="input-group" >
-                            <span class="input-group-btn">
-                              <a id="lHelper" class="btn btn-default" tabindex="0" role="button" data-container="body"
-                                 data-placement="left">
-                                  <i class="material-icons">help</i>
-                              </a>
-                            </span>
-                            <span class="input-group-addon">
-                                <div class="formula-input-label">L</div>
-                            </span>
-                            <label for="l"></label><input id="l" class="form-control formula-input" type="text">
-                        </span>
-                        <span id="formula">
+	<div class="section">
+		<div class="jumbotron">
+			<h1>Game Physics Builder</h1>
+			<p>Online tool to create and test physics for your platformer game !</p>
+		</div>
+		<div class="row">
+			<div class="col-md-3">
+				<div class="panel panel-info">
+					<div class="panel-heading">
+						<h3 class="panel-title">Parameters</h3>
+					</div>
+					<div class="panel-body">
+						<h4>Jump heights:</h4>
+						<span class="input-group">
+              <span class="input-group-btn">
+                <a id="y1Helper" class="btn btn-default" tabindex="0" role="button" data-container="body"
+                   data-placement="left" data-html="true">
+	                <i class="material-icons">help</i>
+                </a>
+              </span>
+              <span class="input-group-addon">
+	              <div class="formula-input-label">Y1</div>
+              </span>
+              <label for="y1"></label><input id="y1" class="form-control" type="text">
+            </span>
+						<span class="input-group">
+              <span class="input-group-btn">
+                <a id="y2Helper" class="btn btn-default" tabindex="0" role="button" data-container="body"
+                   data-placement="left" data-html="true">
+                    <i class="material-icons">help</i>
+                </a>
+              </span>
+              <span class="input-group-addon">
+                  <div class="formula-input-label">Y2</div>
+              </span>
+              <label for="y2"></label><input id="y2" class="form-control" type="text">
+            </span>
+						<span class="input-group">
+              <span class="input-group-btn">
+                <a id="y3Helper" class="btn btn-default" tabindex="0" role="button" data-container="body"
+                   data-placement="left" data-html="true">
+                    <i class="material-icons">help</i>
+                </a>
+              </span>
+              <span class="input-group-addon">
+                  <div class="formula-input-label">Y2</div>
+              </span>
+              <label for="y3"></label><input id="y3" class="form-control" type="text">
+            </span>
+						<h4>Jump duration:</h4>
+						<span class="input-group">
+              <span class="input-group-btn">
+                <a id="lHelper" class="btn btn-default" tabindex="0" role="button" data-container="body"
+                   data-placement="left" data-html="true">
+                  <i class="material-icons">help</i>
+                </a>
+              </span>
+              <span class="input-group-addon">
+                <div class="formula-input-label">L</div>
+              </span>
+              <label for="l"></label><input id="l" class="form-control formula-input" type="text">
+            </span>
+						<br/>
+					</div>
+				</div>
+				<div class="panel panel-info">
+					<div class="panel-heading">
+						<h3 class="panel-title">Presets</h3>
+					</div>
+					<div id="presets" class="btn-group-vertical">
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="panel panel-info">
+					<div class="panel-heading">
+						<h3 class="panel-title">Tester</h3>
+					</div>
+					<div class="panel-body canvas-container">
+						<canvas id="testEngine" width="480" height="320"></canvas>
+						<span class="setting-label">Scale: <span id="scaleVal">x1</span></span>
+						<div class="setting" id="scaleSlider"></div>
+						<div class="row">
+							<div class="col-md-6">
+								<span class="setting-label">Speed: <span id="speedVal">x1</span></span>
+								<div class="setting" id="speedSlider"></div>
+							</div>
+							<div class="col-md-6">
+								<span class="setting-label">Acceleration: <span id="accVal">x1</span></span>
+								<div class="setting" id="accSlider"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="panel panel-info">
+					<div class="panel-heading">
+						<a id="OutputHelper" class="panel-title" tabindex="0" role="button" data-container="body"
+						   data-placement="left" data-html="true">
+							<i class="material-icons">help</i>
+						</a>
+						<h3 class="panel-title">Output</h3>
+					</div>
+					<div class="panel-body">
+						<span id="formula" style="display: block;"><!-- otherwise the following br not work -->
 							V(t) = V0 + R*s - G*t + F*t*j
 						</span>
-                        <br />
-                    </div>
-                </div>
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <a id="OutputHelper" class="panel-title" tabindex="0" role="button" data-container="body"
-                           data-placement="left">
-                            <i class="material-icons">help</i>
-                        </a>
-                        <h3 class="panel-title">Output</h3>
-                    </div>
-                    <div class="panel-body">
-                        <div class="input-group formula-input-group">
+						<br />
+						<div class="input-group formula-input-group">
 							<span class="input-group-addon">
 								<div class="formula-input-label">V0</div>
 							</span>
-                            <label for="v0_out"></label><input id="v0_out" class="form-control formula-input" type="text" readonly>
-                        </div>
-                        <div class="input-group formula-input-group">
+							<label for="v0_out"></label><input id="v0_out" class="form-control formula-input" type="text" readonly>
+						</div>
+						<div class="input-group formula-input-group">
 							<span class="input-group-addon">
 								<div class="formula-input-label">R</div>
 							</span>
-                            <label for="r_out"></label><input id="r_out" class="form-control formula-input" type="text" readonly>
-                        </div>
-                        <div class="input-group formula-input-group">
-							<span class="input-group-addon">
-								<div class="formula-input-label">G</div>
-							</span>
-                            <label for="g_out"></label><input id="g_out" class="form-control formula-input" type="text" readonly>
-                        </div>
-                        <div class="input-group formula-input-group">
-							<span class="input-group-addon">
-								<div class="formula-input-label">F</div>
-							</span>
-                            <label for="f_out"></label><input id="f_out" class="form-control formula-input" type="text" readonly>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="panel panel-info">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Tester</h3>
-                    </div>
-                    <div class="panel-body canvas-container">
-                        <canvas id="testEngine" width="480" height="320"></canvas>
-                        <span class="setting-label">Scale: <span id="scaleVal">x1</span></span>
-                        <div class="setting" id="scaleSlider"></div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <span class="setting-label">Speed: <span id="speedVal">x1</span></span>
-                                <div class="setting" id="speedSlider"></div>
-                            </div>
-                            <div class="col-md-6">
-                                <span class="setting-label">Acceleration: <span id="accVal">x1</span></span>
-                                <div class="setting" id="accSlider"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-            </div>
-            <div class="col-md-3">
-                <div class="panel panel-info">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Presets</h3>
-                    </div>
-                    <div id="presets" class="btn-group-vertical">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="panel panel-primary">
-        <div class="panel-heading">
-            <h3 class="panel-title">How to apply it into your game</h3>
-        </div>
-        <div class="panel-body">
-            Blablabla
-        </div>
-    </div>
-    <div class="panel panel-primary">
-        <div class="panel-heading">
-            <h3 class="panel-title">More info</h3>
-        </div>
-        <div class="panel-body">
-            Blabla explanation and link to paper
-        </div>
-    </div>
+							<label for="r_out"></label><input id="r_out" class="form-control formula-input" type="text" readonly>
+						</div>
+						<div class="input-group formula-input-group">
+              <span class="input-group-addon">
+                <div class="formula-input-label">G</div>
+              </span>
+							<label for="g_out"></label><input id="g_out" class="form-control formula-input" type="text" readonly>
+						</div>
+						<div class="input-group formula-input-group">
+              <span class="input-group-addon">
+                <div class="formula-input-label">F</div>
+              </span>
+							<label for="f_out"></label><input id="f_out" class="form-control formula-input" type="text" readonly>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="panel panel-info">
+		<div class="panel-heading">
+			<h3 class="panel-title">How to apply it into your game</h3>
+		</div>
+		<div class="panel-body">
+			Blablabla
+		</div>
+	</div>
+	<div class="panel panel-info">
+		<div class="panel-heading">
+			<h3 class="panel-title">More info</h3>
+		</div>
+		<div class="panel-body">
+			Blabla explanation and link to paper
+		</div>
+	</div>
 </div>
 <footer>
-    <a href="#">Donate</a>
-    <p>|</p>
-    <p>©&nbsp;</p><p class="current-year"></p><p>&nbsp;- WinterAlexander</p>
+	<!-- I don't really want to copyright this page after all-->
+	<p>App and concept by <a href="https://github.com/WinterAlexander">Alexander Winter</a></p>
+	<br />
+	<p><a href="#">Donate</a> or <a href="#">Contact</a></p><!-- paypalto winterturbatus@gmail.com and mailto winter_alexander@outlook.com -->
+	<br />
+	<p>Thanks to <a href="https://github.com/PierreOlivierBrillant">Pierre-Olivier Brillant</a> for the design of this
+		page.</p>
 </footer>
 </body>
 </html>
