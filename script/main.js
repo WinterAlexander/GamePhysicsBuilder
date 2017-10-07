@@ -5,9 +5,12 @@ var ctx;
 
 var G, V0, F, R;
 
-var speed = 20;
-var acc = 100;
-var dec = 25;
+var baseSpeed = 10;
+var speed = baseSpeed;
+
+var baseAcc = 50;
+var acc = baseAcc;
+var dec = acc / 4;
 
 var baseScale = 25;
 var scale = baseScale;
@@ -51,9 +54,9 @@ $(function() {
     $('#speedSlider').slider({
         orientation: "horizontal",
         range: "min",
-        max: 100 * baseScale,
-        min: 2 * baseScale,
-        value: speed * baseScale,
+        max: 4 * baseSpeed,
+        min: 0.1 * baseSpeed,
+        value: baseSpeed,
         slide: updateSpeed,
         change: updateSpeed
     });
@@ -61,9 +64,9 @@ $(function() {
     $('#accSlider').slider({
         orientation: "horizontal",
         range: "min",
-        max: 200 * baseScale,
-        min: 1 * baseScale,
-        value: acc * baseScale,
+        max: 10 * baseAcc,
+        min: 0.1 * baseAcc,
+        value: baseAcc,
         slide: updateAcc,
         change: updateAcc
     });
@@ -75,13 +78,13 @@ function updateScale() {
 }
 
 function updateSpeed() {
-    speed = $("#speedSlider").slider("value") / baseScale;
-    $("#speedVal").text(parseFloat(speed.toFixed(2)));
+    speed = $("#speedSlider").slider("value");
+    $("#speedVal").text("x" + parseFloat((speed / baseSpeed).toFixed(2)));
 }
 
 function updateAcc() {
-    acc = $("#accSlider").slider("value") / baseScale;
-    $("#accVal").text(parseFloat(acc.toFixed(2)));
+    acc = $("#accSlider").slider("value");
+    $("#accVal").text("x" + parseFloat((acc / baseAcc).toFixed(2)));
     dec = acc / 4;
 }
 
