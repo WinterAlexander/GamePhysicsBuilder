@@ -20,12 +20,21 @@ var lastUpdate = Date.now();
 var rightPressed = false, leftPressed = false, upPressed = false;
 
 var presets = [
-				{name: "Default", Y1: 2, Y2: 4, Y3: 5, L: 0.75},
-				{name: "Fluffy", Y1: 3, Y2: 5, Y3: 6, L: 1.5},
-				{name: "Rock", Y1: 6, Y2: 6.5, Y3: 7, L: 0.4}
+				{ name: "Default", Y1: 2, Y2: 4, Y3: 5, L: 0.75 },
+				{ name: "Fluffy", Y1: 3, Y2: 5, Y3: 6, L: 1.5 },
+				{ name: "Bouncy", Y1: 6, Y2: 6.5, Y3: 7, L: 0.4 },
+                { name: "Familiar", Y1: 1.5, Y2: 4, Y3: 6, L: 0.8 },
+                { name: "Too realistic", Y1: 0.1, Y2: 0.5, Y3: 1, L: 0.45 },
+                { name: "Lunar", Y1: 3, Y2: 7, Y3: 8, L: 10 }
 			];
 
 var validFormula = false;
+
+var helpY1 = "<b>Y1</b> is the jump height reached when you release jump immediately after pressing it and without any momentum.";
+var helpY2 = "<b>Y2</b> is the jump height reached when you hold jump all the way but without any momentum.";
+var helpY3 = "<b>Y3</b> is the jump height reached when you hold jump all the way with maximum momentum. (The box becomes magenta.)";
+var helpL = "<b>L</b> is the duration in seconds for a jump reaching height Y2.";
+var helpOut = "The following values are the constants used in the velocity formula in order to produce those physics. You can learn more about the formula in the next sections.";
 
 $(function() {
     $(".formula-input").on("input propertychange paste", updateFormula);
@@ -69,6 +78,20 @@ $(function() {
         value: baseAcc,
         slide: updateAcc,
         change: updateAcc
+    });
+
+    $("#helpHeights").on("click", function() {
+        $("#y1-help").html($("#y1-help").text().length == 0 ? helpY1 : "");
+        $("#y2-help").html($("#y2-help").text().length == 0 ? helpY2 : "");
+        $("#y3-help").html($("#y3-help").text().length == 0 ? helpY3 : "");
+    });
+
+    $("#helpDuration").on("click", function() {
+        $("#l-help").html($("#l-help").text().length == 0 ? helpL : "");
+    });
+
+    $("#helpOut").on("click", function() {
+       $("#out-help").html($("#out-help").text().length == 0 ? helpOut : "");
     });
 });
 
@@ -243,9 +266,13 @@ function updateFormula() {
     var y3 = Number($("#y3").val());
     var l = Number($("#l").val());
 
-    if(isNaN(y1) || isNaN(y2) || isNaN(y3) || isNaN(l) || y1 < 0 || y2 < y1 || y3 < y2 || l <= 0) {
+    if(isNaN(y1) || isNaN(y2) || isNaN(y3) || isNaN(l) || y1 <= 0 || y2 < y1 || y3 < y2 || l <= 0) {
         validFormula = false;
-        $("#formula").html("V(t) = V0 + R*s - G*t + F*t*j");
+        $("#formula").html("<b>V</b>(<b>t</b>) = <b>V0</b> + <b>R</b>*<b>s</b> - <b>G</b>*<b>t</b> + <b>F</b>*<b>t</b>*<b>j</b>");
+        $("#v0_out").val("");
+        $("#g_out").val("");
+        $("#f_out").val("");
+        $("#r_out").val("");
         return;
     }
 
@@ -254,8 +281,12 @@ function updateFormula() {
     F = 8 * y2 * (y2 - y1) / (l * l * y1);
     R = 4 * y2 * (Math.sqrt(y3 / y2) - 1) / l;
 
-    $("#formula").html("V(t) = " + parseFloat(V0.toFixed(3)) + " + " + parseFloat(R.toFixed(3)) + "s - " + parseFloat(G.toFixed(3)) + "t + " + parseFloat(F.toFixed(3)) + "t*j");
-	validFormula = true;
+    $("#formula").html("<b>V</b>(<b>t</b>) = " + parseFloat(V0.toFixed(3)) + " + " + parseFloat(R.toFixed(3)) + "<b>s</b> - " + parseFloat(G.toFixed(3)) + "<b>t</b> + " + parseFloat(F.toFixed(3)) + "<b>t</b>*<b>j</b>");
+    $("#v0_out").val(V0.toFixed(4));
+    $("#g_out").val(G.toFixed(4));
+    $("#f_out").val(F.toFixed(4));
+    $("#r_out").val(R.toFixed(4));
+    validFormula = true;
 }
 
 function keyDownHandler(e) {
@@ -265,30 +296,26 @@ function keyDownHandler(e) {
     }
     else if(e.keyCode == 38 || e.keyCode == 87 || e.keyCode == 32) {
         upPressed = true;
-
         e.preventDefault();
     }
     else if(e.keyCode == 37 || e.keyCode == 65) {
         leftPressed = true;
         e.preventDefault();
     }
-    else if(e.keyCode == 40) {
+    else if(e.keyCode == 40)
         e.preventDefault();
-    }
+
 }
 
 function keyUpHandler(e) {
-    if(e.keyCode == 39 || e.keyCode == 68) {
+    if(e.keyCode == 39 || e.keyCode == 68)
         rightPressed = false;
-    }
-    else if(e.keyCode == 38 || e.keyCode == 87 || e.keyCode == 32) {
+
+    else if(e.keyCode == 38 || e.keyCode == 87 || e.keyCode == 32)
         upPressed = false;
-    }
-    else if(e.keyCode == 37 || e.keyCode == 65) {
+
+    else if(e.keyCode == 37 || e.keyCode == 65)
         leftPressed = false;
-    }
-    else if(e.keyCode == 40) {
-    }
 }
 
 function signum(x) {

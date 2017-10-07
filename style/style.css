@@ -1,11 +1,13 @@
 body {
-    background-color: aliceblue;
+    background: url('../res/background.jpg') repeat;
 }
 
 .section {
     background-color: white;
     padding: 2em;
     margin: 2em;
+    border-radius: 3px;
+    box-shadow: 0px 0px 3px black;
 }
 
 .footer {
@@ -13,11 +15,19 @@ body {
     margin: 2em;
     background-color: white;
     text-align: center;
-    width: 100%;
+    box-shadow: 0px 0px 3px black;
 }
 
 h1 {
+    text-align: center;
+    color: #3ec947;
+    text-shadow: 3px 3px 1px black;
+    font-size: 80pt;
+    font-family: "Agency FB", sans-serif;
+}
 
+h2 {
+    text-align: center;
 }
 
 #formula {
@@ -30,7 +40,7 @@ h1 {
 }
 
 .formula-input-group {
-    margin-top: 1em;
+    margin-bottom: 1em;
 }
 
 .formula-input-label {
@@ -55,15 +65,38 @@ h1 {
 }
 
 .setting .ui-slider-range {
-    background: #999999;
+    background: #c6c6c6;
 }
 
 .setting .ui-slider-handle {
-    border-color: #999999;
+    border-color: #c6c6c6;
 }
 
-.setting-label {
+.setting-label, .param-label {
     margin-top: 20px;
     font-size: large;
     display: block;
+}
+
+.help-btn {
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 1em;
+}
+
+.param-help {
+    display: block;
+    font-size: medium;
+}
+
+#out-help {
+    margin-bottom: 10px;
+}
+
+input[readonly] {
+    background-color: #e6e6e6 !important;
 }
