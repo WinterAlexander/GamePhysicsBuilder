@@ -30,12 +30,6 @@ var presets = [
 
 var validFormula = false;
 
-var helpY1 = "<b>Y1</b> is the jump height reached when you release jump immediately after pressing it and without any momentum.";
-var helpY2 = "<b>Y2</b> is the jump height reached when you hold jump all the way but without any momentum.";
-var helpY3 = "<b>Y3</b> is the jump height reached when you hold jump all the way with maximum momentum. (The box becomes magenta.)";
-var helpL = "<b>L</b> is the duration in seconds for a jump reaching height Y2.";
-var helpOut = "The following values are the constants used in the velocity formula in order to produce those physics. You can learn more about the formula in the next sections.";
-
 $(function() {
     $(".formula-input").on("input propertychange paste", updateFormula);
 
@@ -113,7 +107,7 @@ function updateAcc() {
 
 function loadPresets() {
 	for(var i in presets) {
-		$("#presets").append('<a class="preset btn btn-default" id="preset_' + i + '">' + presets[i].name + '</a>');
+		$("#presets").append('<a class="preset btn btn-default" href="#" id="preset_' + i + '">' + presets[i].name + '</a>');
 	}
 
 	$(".preset").on("click", function(event) {
