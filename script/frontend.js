@@ -1,6 +1,4 @@
-//I'd like to keep my var names bolds as they are important element linking this app to my paper
-//the bold is to simulate a math constant in Latex but I might as well download a mathjax lib for browser
-//instead
+
 var content = {
     Y1:     '<b>Y1</b> is the jump height reached when you release jump immediately after pressing it and without any momentum.',
     Y2:     '<b>Y2</b> is the jump height reached when you hold jump all the way but without any momentum.',
@@ -10,15 +8,6 @@ var content = {
 };
 
 $(function () {
-    preparePopover();
-    setCurrentYear();
-});
-
-function setCurrentYear() {
-    $('.current-year').append(new Date().getFullYear());
-}
-
-function preparePopover(){
     $('#y1Helper').popover({
         content: content.Y1,
         trigger: 'focus'
@@ -43,4 +32,4 @@ function preparePopover(){
         content: content.Output,
         trigger: 'focus'
     });
-}
+});

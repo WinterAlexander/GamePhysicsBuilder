@@ -9,11 +9,13 @@
 	<script src="lib/jQuery/jquery-3.2.1.min.js"></script>
 	<script src="lib/jQuery/jquery-ui-1.12.1.min.js"></script>
 	<script src="lib/Bootstrap/bootstrap-3.3.7.min.js"></script>
+	
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-	
 	<link rel="stylesheet" href="lib/Bootstrap/style.css">
-	<script src="script/frontend.js"></script>
 	
+	<link rel="stylesheet" href="style.css">
+	
+	<script src="script/frontend.js"></script>
 	<script src="script/main.js"></script>
 </head>
 <body>
@@ -31,54 +33,54 @@
 					</div>
 					<div class="panel-body">
 						<h4>Jump heights:</h4>
-						<span class="input-group">
-              <span class="input-group-btn">
-                <a id="y1Helper" class="btn btn-default" tabindex="0" role="button" data-container="body"
-                   data-placement="left" data-html="true">
-	                <i class="material-icons">help</i>
-                </a>
-              </span>
+						<span class="input-group input-group-sm">
               <span class="input-group-addon">
 	              <div class="formula-input-label">Y1</div>
               </span>
               <label for="y1"></label><input id="y1" class="form-control formula-input" type="text">
-            </span>
-						<span class="input-group">
               <span class="input-group-btn">
-                <a id="y2Helper" class="btn btn-default" tabindex="0" role="button" data-container="body"
+                <a id="y1Helper" class="btn" tabindex="0" role="button" data-container="body"
                    data-placement="left" data-html="true">
-                    <i class="material-icons">help</i>
+	                <i class="material-icons">help</i>
                 </a>
               </span>
+            </span>
+						<span class="input-group input-group-sm">
               <span class="input-group-addon">
                   <div class="formula-input-label">Y2</div>
               </span>
               <label for="y2"></label><input id="y2" class="form-control formula-input" type="text">
-            </span>
-						<span class="input-group">
               <span class="input-group-btn">
-                <a id="y3Helper" class="btn btn-default" tabindex="0" role="button" data-container="body"
+                <a id="y2Helper" class="btn" tabindex="0" role="button" data-container="body"
                    data-placement="left" data-html="true">
                     <i class="material-icons">help</i>
                 </a>
               </span>
+            </span>
+						<span class="input-group input-group-sm">
               <span class="input-group-addon">
                   <div class="formula-input-label">Y2</div>
               </span>
               <label for="y3"></label><input id="y3" class="form-control formula-input" type="text">
-            </span>
-						<h4>Jump duration:</h4>
-						<span class="input-group">
               <span class="input-group-btn">
-                <a id="lHelper" class="btn btn-default" tabindex="0" role="button" data-container="body"
+                <a id="y3Helper" class="btn" tabindex="0" role="button" data-container="body"
                    data-placement="left" data-html="true">
-                  <i class="material-icons">help</i>
+                    <i class="material-icons">help</i>
                 </a>
               </span>
+            </span>
+						<h4>Jump duration:</h4>
+						<span class="input-group input-group-sm">
               <span class="input-group-addon">
                 <div class="formula-input-label">L</div>
               </span>
               <label for="l"></label><input id="l" class="form-control formula-input" type="text">
+              <span class="input-group-btn">
+                <a id="lHelper" class="btn" tabindex="0" role="button" data-container="body"
+                   data-placement="left" data-html="true">
+                  <i class="material-icons">help</i>
+                </a>
+              </span>
             </span>
 						<br/>
 					</div>
@@ -116,36 +118,36 @@
 			<div class="col-md-3">
 				<div class="panel panel-info">
 					<div class="panel-heading">
+						<h3 class="panel-title">Output</h3>
 						<a id="OutputHelper" class="panel-title" tabindex="0" role="button" data-container="body"
 						   data-placement="left" data-html="true">
 							<i class="material-icons">help</i>
 						</a>
-						<h3 class="panel-title">Output</h3>
 					</div>
 					<div class="panel-body">
 						<span id="formula" style="display: block;"><!-- otherwise the following br not work -->
 							V(t) = V0 + R*s - G*t + F*t*j
 						</span>
 						<br />
-						<div class="input-group formula-input-group">
+						<div class="input-group input-group-sm formula-input-group">
 							<span class="input-group-addon">
 								<div class="formula-input-label">V0</div>
 							</span>
 							<label for="v0_out"></label><input id="v0_out" class="form-control formula-input" type="text" readonly>
 						</div>
-						<div class="input-group formula-input-group">
+						<div class="input-group input-group-sm formula-input-group">
 							<span class="input-group-addon">
 								<div class="formula-input-label">R</div>
 							</span>
 							<label for="r_out"></label><input id="r_out" class="form-control formula-input" type="text" readonly>
 						</div>
-						<div class="input-group formula-input-group">
+						<div class="input-group input-group-sm formula-input-group">
               <span class="input-group-addon">
                 <div class="formula-input-label">G</div>
               </span>
 							<label for="g_out"></label><input id="g_out" class="form-control formula-input" type="text" readonly>
 						</div>
-						<div class="input-group formula-input-group">
+						<div class="input-group input-group-sm formula-input-group">
               <span class="input-group-addon">
                 <div class="formula-input-label">F</div>
               </span>

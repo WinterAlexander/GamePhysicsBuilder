@@ -73,20 +73,6 @@ $(function() {
         slide: updateAcc,
         change: updateAcc
     });
-
-    $("#helpHeights").on("click", function() {
-        $("#y1-help").html($("#y1-help").text().length == 0 ? helpY1 : "");
-        $("#y2-help").html($("#y2-help").text().length == 0 ? helpY2 : "");
-        $("#y3-help").html($("#y3-help").text().length == 0 ? helpY3 : "");
-    });
-
-    $("#helpDuration").on("click", function() {
-        $("#l-help").html($("#l-help").text().length == 0 ? helpL : "");
-    });
-
-    $("#helpOut").on("click", function() {
-       $("#out-help").html($("#out-help").text().length == 0 ? helpOut : "");
-    });
 });
 
 function updateScale() {
@@ -107,7 +93,7 @@ function updateAcc() {
 
 function loadPresets() {
 	for(var i in presets) {//adding href="#" adds nothing and scroll back to the top which can be annoying for user
-		$("#presets").append('<a class="preset btn btn-default" id="preset_' + i + '">' + presets[i].name + '</a>');
+		$("#presets").append('<a class="preset" id="preset_' + i + '">' + presets[i].name + '</a>');
 	}
 
 	$(".preset").on("click", function(event) {
