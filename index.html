@@ -25,6 +25,9 @@
 			<h1>Game Physics Builder</h1>
 			<p>Online tool to create and test physics for your platformer game !</p>
 		</div>
+		<div id="thankyou">
+			Thank you very much for your donation ! ❤
+		</div>
 		<div class="row">
 			<div class="col-md-3">
 				<div class="panel panel-info">
@@ -159,18 +162,22 @@
 	</div>
 	<div class="panel panel-info">
 		<div class="panel-heading">
-			<h3 class="panel-title">How to apply it into your game</h3>
+			<h3 class="panel-title">About</h3>
 		</div>
-		<div class="panel-body">
-			Blablabla
-		</div>
-	</div>
-	<div class="panel panel-info">
-		<div class="panel-heading">
-			<h3 class="panel-title">More info</h3>
-		</div>
-		<div class="panel-body">
-			Blabla explanation and link to paper
+		<div class="panel-body" id="moreInfo">
+			This game physics builder has been made to demonstrate the calculations done in a paper. This paper does deep into
+			the specifics of the jump formula but you may skip to the last section to see an example of how it is applied in a
+			game. If you have any question feel free to contact me at
+			<a href="mailto:winter_alexander@outlook.com">winter_alexander@outlook.com</a>.
+			<br />
+			<br />
+			<center>
+				<a class="mega_link" href="jump_formula.pdf">Click here to download the paper</a>
+			</center>
+			<br />
+			<br />
+			<a href="example.txt">Here</a>'s a very basic pseudo-code implementation offering the same behavior as this tool.
+			(Also in the paper).
 		</div>
 	</div>
 </div>
@@ -178,7 +185,15 @@
 	<!-- I don't really want to copyright this page after all-->
 	<p>App and concept by <a href="https://github.com/WinterAlexander">Alexander Winter</a></p>
 	<br />
-	<p><a href="#">Donate</a> or <a href="#">Contact</a></p><!-- paypalto winterturbatus@gmail.com and mailto winter_alexander@outlook.com -->
+	<p>
+		<form id="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+			<input type="hidden" name="cmd" value="_s-xclick">
+			<input type="hidden" name="hosted_button_id" value="9EAZZ26WHXXCC">
+			<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+			<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+		</form>
+	or <a href="mailto:winter_alexander@outlook.com">Contact</a>
+	</p>
 	<br />
 	<p>Thanks to <a href="https://github.com/PierreOlivierBrillant">Pierre-Olivier Brillant</a> for the design of this
 		page.</p>

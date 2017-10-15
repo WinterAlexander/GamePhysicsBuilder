@@ -1,0 +1,35 @@
+//Constants
+float acceleration, deceleration, maxSpeed;
+float V0, G, R, F;
+
+void update(float delta)
+{
+    int prevDir = signum(velocity.x);
+    int newDir = 0;
+
+    if(leftPressed != rightPressed) //if only one of them is pressed
+        newDir = leftPressed ? -1 : 1;
+
+    velocity.x -= prevDir * deceleration * delta;
+
+    if(signum(player.velX) != prevDir)
+        velocity.x = 0;
+
+    if(abs(velocity.x) < maxSpeed || prevDir != newDir)
+    {
+        velocity.x += newDir * acceleration * delta;
+
+        if(abs(player.velX) > maxSpeed && prevDir == newDir)
+            velocity.x = maxSpeed * prevDir;
+    }
+
+    if(jumpPressed)
+    {
+        if(onGround)
+            velocity.y += V0 + min(abs(velocity.x) / maxSpeed, 1) * R;
+        velocity.y += F * delta;
+    }
+
+    velocity.y -= G * delta;
+    position += velocity * delta;
+}

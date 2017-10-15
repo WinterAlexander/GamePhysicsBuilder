@@ -96,6 +96,10 @@ footer > * {
     float: right;
 }
 
+#OutputHelper:hover, #OutputHelper:active, #OutputHelper:visited, #OutputHelper:focus {
+    color: #2c3e50 !important;
+}
+
 .formula-input {
     border-right-width: 0;
 }
@@ -111,4 +115,26 @@ footer > * {
 
 .input-group-btn > .btn:hover {
     color: #c3c7c8;
+}
+
+#paypal > input[type=image] {
+    border: 0;
+}
+
+#thankyou {
+    display: none;
+    text-align: center;
+    font-size: 25px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    background-color: #ffa4b0;
+}
+
+#moreInfo {
+    font-size: large;
+}
+
+.mega_link {
+    font-size: x-large;
 }
